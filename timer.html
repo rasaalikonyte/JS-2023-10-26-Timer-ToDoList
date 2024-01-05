@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+</head>
+<style>
+    .timer {
+        width: 500px;
+        background: black;
+        border-radius: 5px;
+        color: white;
+        padding: 2rem;
+        text-align: center;
+        margin: 0 auto;
+        font-size: 50px;
+        font-family: Arial;
+    }
+    .timer-form {
+        width: 500px;
+        margin: 0 auto;
+    }
+</style>
+</head>
+
+<body>
+        <div class="timer">
+        <span data-minutes></span>
+        <span data-seconds></span>
+    </div>
+    <div class="my-3 d-flex justify-content-center">
+        <button class="btn btn-secondary" onclick="clearTimer()">Atstatyti</button>
+    </div>
+
+    <script>
+
+    let minutes = 10;
+    let seconds = 0;
+    let interval;
+
+    const createTimer = () => {
+        interval = setInterval(() => {
+            if(minutes === 0 && seconds === 0)
+            return clearInterval(interval);
+
+            if(seconds === 0) {
+                minutes--;
+                seconds = 59;
+            } else {
+                seconds--;
+            }
+
+            document.querySelector('[data-minutes]').textContent = minutes;
+            document.querySelector('[data-seconds]').textContent = seconds < 10 ? '0' + seconds : seconds;            
+            }, 1000);
+        }
+        
+        const clearTimer = () => {
+            clearInterval(interval);
+
+            minutes = 0;
+            seconds = 0;
+
+            document.querySelector('[data-minutes]').textContent = minutes;
+            document.querySelector('[data-seconds]').textContent = seconds < 10 ? '0' + seconds : seconds;
+        }
+
+        document.querySelector('[data-minutes]').textContent = minutes;
+        document.querySelector('[data-seconds]').textContent = seconds < 10 ? '0' + seconds : seconds;
+
+        createTimer();
+        
+
+    </script>
+</body>
+</html>
